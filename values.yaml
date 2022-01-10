@@ -1,8 +1,21 @@
-# Default values for honeypot-helm.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# elasticsearchNodeCount specifies the number of nodes in the Elastic Search cluster
+elasticsearchNodeCount: 4
 
-replicaCount: 1
+# elasticsearchImage specifies the Elastic Search image to use. https://hub.docker.com/_/elasticsearch
+elasticsearchImage: docker.elastic.co/elasticsearch/elasticsearch:7.16.1
+
+# fluentdImage specifies the FluentD image to use. https://github.com/fluent/fluentd-kubernetes-daemonset
+fluentdImage: fluent/fluentd-kubernetes-daemonset:v1.14.3-debian-elasticsearch7-1.0
+
+# kibanaNodePort is the port used to expose Kibana externally.
+kibanaNodePort: 30561
+
+# kibanaImage specifies the Kibana image to use. https://hub.docker.com/_/kibana
+kibanaImage: docker.elastic.co/kibana/kibana:7.16.1
+
+
+
+# Defaults from Helm below this point. Saving because I like having examples, will delete in the future. -Zach
 
 image:
   repository: nginx

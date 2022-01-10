@@ -10,7 +10,7 @@ spec:
   type: NodePort
   ports:
   - port: 5601
-    nodePort: 30561
+    nodePort: {{ .Values.kibanaNodePort }}
   selector:
     app: kibana
 ---
@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
       - name: kibana
-        image: docker.elastic.co/kibana/kibana:7.16.1
+        image: {{ .Values.kibanaImage }}
         resources:
           limits:
             cpu: 1000m
