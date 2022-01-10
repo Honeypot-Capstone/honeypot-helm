@@ -1,2 +1,2 @@
-# honeypot-helm
+# Honeypot Helm
 Helm chart for honeypot project.

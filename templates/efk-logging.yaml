@@ -1,0 +1,5 @@
+# EFK stack namespace definition.
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: efk-logging

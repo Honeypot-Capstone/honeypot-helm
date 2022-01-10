@@ -1,0 +1,3 @@
+1. You can connect to Kibana by running using the port specified in values.yaml with the address given by:
+	$ minikube ip
+   Put <cluster-ip>:<kibana-port> in your browser to connect.
