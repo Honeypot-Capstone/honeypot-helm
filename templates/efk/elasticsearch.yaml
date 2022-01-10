@@ -62,7 +62,7 @@ spec:
         - name: discovery.seed_hosts
           value: "es-cluster-[0,..,{{ sub .Values.elasticsearchNodeCount 1 }}].elasticsearch"
         - name: cluster.initial_master_nodes
-          value: "es-cluster-[0,..,{{ sub .Values.elasticsearchNodeCount 1 }}]"
+          value: "es-cluster-0"
         - name: ES_JAVA_OPTS
           value: "-Xms512m -Xmx512m"
       initContainers:
