@@ -60,9 +60,9 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: discovery.seed_hosts
-          value: "es-cluster-[0,..,{{ sub .Values.elasticsearchNodeCount 1 }}].elasticsearch"
+          value: "{{- range $i, $e := until (.Values.elasticsearchNodeCount | int) }}es-cluster-{{ $i }}.elasticsearch,{{ end }}"
         - name: cluster.initial_master_nodes
-          value: "es-cluster-0"
+          value: "{{- range $i, $e := until (.Values.elasticsearchNodeCount | int) }}es-cluster-{{ $i }},{{ end }}"
         - name: ES_JAVA_OPTS
           value: "-Xms512m -Xmx512m"
       initContainers:
