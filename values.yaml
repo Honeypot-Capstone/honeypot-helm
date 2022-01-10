@@ -1,5 +1,5 @@
 # elasticsearchNodeCount specifies the number of nodes in the Elastic Search cluster
-elasticsearchNodeCount: 4
+elasticsearchNodeCount: 3
 
 # elasticsearchImage specifies the Elastic Search image to use. https://hub.docker.com/_/elasticsearch
 elasticsearchImage: docker.elastic.co/elasticsearch/elasticsearch:7.16.1
@@ -9,6 +9,9 @@ fluentdImage: fluent/fluentd-kubernetes-daemonset:v1.14.3-debian-elasticsearch7-
 
 # kibanaNodePort is the port used to expose Kibana externally.
 kibanaNodePort: 30561
+
+# kibanaReplicaCount specifies the number of Kibana pods to run.
+kibanaReplicaCount: 2
 
 # kibanaImage specifies the Kibana image to use. https://hub.docker.com/_/kibana
 kibanaImage: docker.elastic.co/kibana/kibana:7.16.1
