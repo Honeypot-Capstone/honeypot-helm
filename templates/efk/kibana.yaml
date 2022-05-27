@@ -1,26 +1,27 @@
+---
 # Kibana service definition.
 apiVersion: v1
 kind: Service
 metadata:
   name: kibana
-  namespace: efk-logging
+  namespace: {{ .Values.managementNamespace }}
   labels:
     app: kibana
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
   - port: 5601
     nodePort: {{ .Values.kibanaNodePort }}
   selector:
     app: kibana
----
 
+---
 # Kibana application definition.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kibana
-  namespace: efk-logging
+  namespace: {{ .Values.managementNamespace }}
   labels:
     app: kibana
 spec:
@@ -43,6 +44,6 @@ spec:
             cpu: 100m
         env:
         - name: ELASTICSEARCH_URL
-          value: http://elasticsearch:9200
+          value: http://10.8.1.1:9200
         ports:
         - containerPort: 5601

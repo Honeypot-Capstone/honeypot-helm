@@ -1,28 +1,29 @@
+---
 # Elastic Search service definition.
 kind: Service
 apiVersion: v1
 metadata:
   name: elasticsearch
-  namespace: efk-logging
+  namespace: {{ .Values.managementNamespace }}
   labels:
     app: elasticsearch
 spec:
   selector:
     app: elasticsearch
-  clusterIP: None
+  clusterIP: 10.8.1.1
   ports:
     - port: 9200
       name: rest
     - port: 9300
       name: inter-node
----
 
+---
 # Elastic Search cluster definition.
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: es-cluster
-  namespace: efk-logging
+  namespace: {{ .Values.managementNamespace }}
 spec:
   serviceName: elasticsearch
   replicas: {{ .Values.elasticsearchNodeCount }}

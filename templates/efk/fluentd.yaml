@@ -1,13 +1,14 @@
+---
 # FluentD service account definition.
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: fluentd
-  namespace: efk-logging
+  namespace: {{ .Values.managementNamespace }}
   labels:
     app: fluentd
----
 
+---
 # FluentD authorization role definition.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -25,8 +26,8 @@ rules:
   - get
   - list
   - watch
----
 
+---
 # Binding authorization role to the FluentD service account.
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -39,15 +40,15 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: fluentd
-  namespace: efk-logging
----
+  namespace: {{ .Values.managementNamespace }}
 
+---
 # FluentD daemon set definition.
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: fluentd
-  namespace: efk-logging
+  namespace: {{ .Values.managementNamespace }}
   labels:
     app: fluentd
 spec:
@@ -69,7 +70,7 @@ spec:
         image: {{ .Values.fluentdImage }}
         env:
         - name:  FLUENT_ELASTICSEARCH_HOST
-          value: "elasticsearch.efk-logging.svc.cluster.local"
+          value: 10.8.1.1
         - name:  FLUENT_ELASTICSEARCH_PORT
           value: "9200"
         - name: FLUENT_ELASTICSEARCH_SCHEME
